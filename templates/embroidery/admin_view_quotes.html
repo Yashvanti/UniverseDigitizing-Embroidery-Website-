@@ -1,0 +1,66 @@
+{% extends 'embroidery/admin_base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+</head>
+
+<div class="container">
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h6 class="panel-title">Total Quotes Submitted</h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+          <th>Design Name</th>
+          <th>Placement</th>
+          <th>Garment</th>
+          <th>Size</th>
+          <th>Email</th>
+          <th>Contact No</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for quote in quotes %}
+        <tr>
+          <td>{{ quote.design_name }}</td>
+          <td>{{ quote.placement }}</td>
+          <td>{{ quote.garment }}</td>
+          <td>{{ quote.size }}</td>
+          <td>{{ quote.mail_id }}</td>
+          <td>{{ quote.contact_no }}</td>
+          <td>
+            <a class="btn btn-primary btn-xs" href="{% url 'update-quote' quote.id %}">
+              <span class="glyphicon glyphicon-edit"></span>
+            </a>
+            <a class="btn btn-danger btn-xs" href="{% url 'delete-quote' quote.id %}">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}
